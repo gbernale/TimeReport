@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "184377362450",
+    "firebase_url": "https://timereport-ea4ed.firebaseio.com",
+    "project_id": "timereport-ea4ed",
+    "storage_bucket": "timereport-ea4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184377362450:android:10e91471c5311484",
+        "android_client_info": {
+          "package_name": "com.bernal.gilberto.timereport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184377362450-vt0ju0eftieeo1fdq31q664fsqdo8gjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzsEpxS4AifPF8DwbvLZK7MmBTl5TatYE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
