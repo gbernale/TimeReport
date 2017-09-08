@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true">
 
         <TextView
-            android:text="Large text"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -50,7 +50,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextCompanyId"
             android:hint="Company :"/>
-
+        <Spinner
+            android:id="@+id/my_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:text="Save Information"

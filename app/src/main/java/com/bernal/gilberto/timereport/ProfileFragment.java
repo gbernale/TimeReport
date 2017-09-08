@@ -2,13 +2,16 @@ package com.bernal.gilberto.timereport;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -41,6 +47,7 @@ public class ProfileFragment extends Fragment {
     private ValueEventListener mPostListener;
     private View view;
     private static final String TAG = "ProfileFragment";
+    private List <String> companies = new ArrayList<String>();;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,6 +63,32 @@ public class ProfileFragment extends Fragment {
         tv3.setVisibility(View.GONE);
         buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
         buttonSaveData = (Button) view.findViewById(R.id.buttonSaveData);
+  //   add to include cpmpany spinner
+        DatabaseReference companyDbReference = databaseReference.child("Company");
+        companyDbReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+           @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
+                    String companyName = areaSnapshot.child("name").getValue(String.class);
+                    if (companyName != null) {
+                        Spinner companySpinner = (Spinner) view.findViewById(R.id.my_spinner);
+                       companies.add(companyName);
+                    ArrayAdapter<String> companyAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, companies);
+                    companyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    companySpinner.setAdapter(companyAdapter);
+                }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         // loadUserdata(user);
 
