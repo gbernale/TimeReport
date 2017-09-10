@@ -1,5 +1,6 @@
 package com.bernal.gilberto.timereport;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.solver.widgets.Snapshot;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,20 +28,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.bernal.gilberto.timereport.R.id.parent;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth firebaseAuth;
     private Button buttonLogout;
-    private TextView textViewUserMail;
+    private TextView textViewUserMail, textViewCompanyId;
     private DatabaseReference databaseReference;
     private EditText editTextName, editTextAddress, editTextPhone, editTextHourValue, editTextCompanyId;
     private Button buttonSaveData;
@@ -47,7 +44,9 @@ public class ProfileFragment extends Fragment {
     private ValueEventListener mPostListener;
     private View view;
     private static final String TAG = "ProfileFragment";
-    private List <String> companies = new ArrayList<String>();;
+    private List <String> companies = new ArrayList<String>();
+    private String company;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,27 +60,39 @@ public class ProfileFragment extends Fragment {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         TextView tv3 = (TextView) getActivity().findViewById(R.id.tv3);
         tv3.setVisibility(View.GONE);
+        progressDialog = new ProgressDialog(view.getContext());
         buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
         buttonSaveData = (Button) view.findViewById(R.id.buttonSaveData);
-  //   add to include cpmpany spinner
+  //   functionality added to include cpmpany spinner
         DatabaseReference companyDbReference = databaseReference.child("Company");
         companyDbReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
            @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot areaSnapshot: dataSnapshot.getChildren()) {
-                    String companyName = areaSnapshot.child("name").getValue(String.class);
-                    if (companyName != null) {
-                        Spinner companySpinner = (Spinner) view.findViewById(R.id.my_spinner);
+               for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
+                   String companyName = areaSnapshot.child("name").getValue(String.class);
+                   if (companyName != null) {
                        companies.add(companyName);
-                    ArrayAdapter<String> companyAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, companies);
-                    companyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    companySpinner.setAdapter(companyAdapter);
-                }
-                }
+                   }
+               }
+               final Spinner companySpinner = (Spinner) view.findViewById(R.id.my_spinner);
+               ArrayAdapter<String> companyAdapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, companies);
+               companyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+               companySpinner.setAdapter(companyAdapter);
+               companySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                   @Override
+                   public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                       companySpinner.setSelection(position);
+                       company = (String) companySpinner.getSelectedItem();
+                       //selVersion.setText("Selected Android OS:" + selState);
+                   }
 
-            }
+                   @Override
+                   public void onNothingSelected(AdapterView<?> adapterView) {
 
+                   }
+               });
+           }
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -100,14 +111,12 @@ public class ProfileFragment extends Fragment {
                 editTextName = (EditText) view.findViewById(R.id.editTextName);
                 editTextPhone = (EditText) view.findViewById(R.id.editTextPhone);
                 editTextHourValue = (EditText) view.findViewById(R.id.editTextHourValue);
-                editTextCompanyId = (EditText) view.findViewById(R.id.editTextCompanyId);
                 textViewPersons = (TextView) view.findViewById(R.id.textViewPersons);
 
                 String name = editTextName.getText().toString().trim();
                 String address = editTextAddress.getText().toString().trim();
                 String phone = editTextPhone.getText().toString().trim();
                 String value = editTextHourValue.getText().toString().trim();
-                String company = editTextCompanyId.getText().toString().trim();
                 boolean isAdmin = false;
                 int hourvalue = Integer.parseInt(value);
                 User datauser = new User(name, address, phone,hourvalue,isAdmin,company);
@@ -143,10 +152,20 @@ public class ProfileFragment extends Fragment {
                 for (DataSnapshot postSnapshot : customerData.getChildren()){
                     if (postSnapshot.getKey().equals (user.getUid())) {
                         User user = postSnapshot.getValue(User.class);
+
+                        progressDialog.setMessage(" Creating User Profile  Please wait ...");
+                        progressDialog.show();
                         String string = "Name: " + user.getName() + "\nAddress: " + user.getAddress() + "\nTelephone : " + user.getAddress() + "\n\n";
 
                         //Displaying it on textview
                         textViewPersons.setText(string);
+                        progressDialog.dismiss();
+
+                        getActivity().finish();
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), ProfileActivity.class);
+                        startActivity(intent);
+
                     }
                 }}
 
