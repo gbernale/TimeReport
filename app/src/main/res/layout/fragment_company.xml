@@ -50,6 +50,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/editTextEmailAddress"
             android:hint="email address :"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextPeriod"
+            android:hint="Period :"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextperiodBegin"
+            android:hint="Period Begin :"/>
+
         <Button
             android:text="Save Information"
             android:layout_width="wrap_content"

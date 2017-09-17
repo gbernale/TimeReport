@@ -28,7 +28,7 @@ public class CompanyFragment extends Fragment {
     private Button buttonLogout;
     private DatabaseReference databaseReference;
     private EditText  editTextName, editTextAddress, editTextPhone;
-    private EditText editTextCompanyId, editTextEmailAddress;
+    private EditText editTextCompanyId, editTextEmailAddress, editTextPeriod, editTextperiodBegin;
     private Button buttonSaveData;
     private TextView textViewPersons;
     private ValueEventListener mPostListener;
@@ -61,6 +61,8 @@ public class CompanyFragment extends Fragment {
                 editTextAddress = (EditText) view.findViewById(R.id.editTextAddress);
                 editTextPhone = (EditText) view.findViewById(R.id.editTextPhone);
                 editTextEmailAddress = (EditText) view.findViewById(R.id.editTextEmailAddress);
+                editTextPeriod = (EditText) view.findViewById(R.id.editTextPeriod);
+                editTextperiodBegin = (EditText) view.findViewById(R.id.editTextperiodBegin);
                 textViewPersons = (TextView) view.findViewById(R.id.textViewPersons);
 
                 String Id = editTextCompanyId.getText().toString().trim();
@@ -68,8 +70,10 @@ public class CompanyFragment extends Fragment {
                 String address = editTextAddress.getText().toString().trim();
                 String phone = editTextPhone.getText().toString().trim();
                 String email = editTextEmailAddress.getText().toString().trim();
+                String period = editTextPeriod.getText().toString().trim();
+                String periodBegin = editTextperiodBegin.getText().toString().trim();
                 String status = "A";
-                Company company = new Company(Id,name, address, phone,email,status);
+                Company company = new Company(Id,name, address, phone,email,period,periodBegin,status);
                 //FirebaseUser user = firebaseAuth.getCurrentUser();
                 databaseReference.child("Company").push().setValue(company);
 //                databaseReference.child("Company").setValue(company);
