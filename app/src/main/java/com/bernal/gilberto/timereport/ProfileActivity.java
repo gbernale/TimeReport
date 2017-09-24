@@ -82,11 +82,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void  callFragmentAddDateTime ()
     {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        AddDateTimeFragment addDateTimeFragment = new AddDateTimeFragment();
-        transaction.replace(R.id.fragment_container,addDateTimeFragment,"Add Date Time");
-        transaction.commit();
+        Intent i = new Intent(getBaseContext(), TimePicker.class);
+        startActivity(i);
     }
     private void callFragmentProfile()
     {
@@ -98,11 +95,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
     private void callFragmentViewDataTime()
     {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        ViewDataTimeFragment viewdatatimeFragment = new ViewDataTimeFragment();
-        transaction.replace(R.id.fragment_container,viewdatatimeFragment,"Customer Profile");
-        transaction.commit();
+        Intent i = new Intent(getBaseContext(), TimePicker.class);
+        startActivity(i);
     }
 
     private void callFragmentAddCompany()
