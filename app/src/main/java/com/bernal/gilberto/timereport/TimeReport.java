@@ -1,5 +1,7 @@
 package com.bernal.gilberto.timereport;
 
+import java.sql.Time;
+
 /**
  * Created by Gilberto Bernal   on 9/3/2017.
  */
@@ -17,6 +19,8 @@ public class TimeReport {
     public String hour_status ;
     public String user_status;
     public String comments;
+
+    public TimeReport(){}
 
     public TimeReport(String location, int week_number, String date_in, String time_in, String date_out, String time_out, int total_hours, int total_hours_value, String hour_status, String user_status, String comments) {
         this.location = location;

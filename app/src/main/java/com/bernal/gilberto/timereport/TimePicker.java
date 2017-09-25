@@ -16,9 +16,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -159,26 +163,58 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
             }
 
             //startDateTextView.setText( "Time : " + m + " " +" " + h + "\n ");
-            String location = "Main Location";
-            int total_hours = 8;
-            int total_hours_value = 400;
-            int week_number = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
-            String hour_status =  "Pending";
-            String user_status = "Active";
-            String comments = "Regular activities";
+            final  String location = "Main Location";
+            final int total_hours = 8;
+            final int total_hours_value = 400;
+            final int week_number = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+            final String hour_status =  "Pending";
+            final String user_status = "Active";
+            final String comments = "Regular activities";
 
+            // I added on Sept 24 to check and update records if already exist
 
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            TimeReport userdata = new TimeReport(location,week_number,syearin, stimein,syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
-            DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
-            timeReport.setValue(userdata);
-            Toast.makeText(getActivity(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
-            //  after saving the data return to profile activity
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    int checkif=0;
+                    firebaseAuth= FirebaseAuth.getInstance();
+                    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                    DataSnapshot currentUserTimeReports = dataSnapshot.child("TimeReport").child(user.getUid());
+                    for (DataSnapshot currentUserTimeReport : currentUserTimeReports.getChildren()) {
+                        TimeReport currentUserTimeReportValue = currentUserTimeReport.getValue(TimeReport.class);
+                        if(currentUserTimeReportValue.getDate_out().equals (syearout))
+                        {
+                            try {
+                                currentUserTimeReportValue.time_out = stimeout;
+                                currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
+//                                databaseReference.put("/TimeReport/" + time_out, stimeout);
+//                                databaseReference.updateChildren(TimeReport);
+                                checkif=1;
+                            } catch (Exception e) {
+                                e.printStackTrace();  }
+                        }
+                    }
+                    if (checkif == 0 )  {
+                        TimeReport userdata = new TimeReport(location,week_number,syearin, stimein,syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
+                        DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
+                        timeReport.setValue(currentUserTimeReports);
+                        Toast.makeText(getActivity(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
             getActivity().finish();
             Intent intent = new Intent();
             intent.setClass(getActivity(), ProfileActivity.class);
             startActivity(intent);
-
 
         }
 
