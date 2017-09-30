@@ -2,6 +2,141 @@
 <items version="2" >
 
     <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\c6184f84dba4028f3669f4330a696e62f5a7ca10\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76a7a625df0e9027b53dbed6e9ba9a6031a42e39">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_7b0fb8f91c90bf771a663782196d46200d51a07e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\f5bb30a0e4374a65d777639872803cab8a8fd6f8\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2b64f6a762f61a2379d6a79af03e2ee56eefe0b">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_59da01c599de9cb9b6b1e7335140a220bddc5858.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\AppData\Local\Android\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.0-alpha9\constraint-layout-solver-1.0.0-alpha9.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6a908fd0803cc5f65b007101002aec06dc7544da">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\constraint-layout-solver-1.0.0-alpha9_c923c0b390ec5841582a8e92584ebc105fca5a8d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\94ba158c9e5d6f2d0fb3fb3d5ba9bc6703a79e5d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c478771eacdf8217e093a1b967b8152cfdaadc94">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_fa51d321a24776207b378586a5c34ac3bc3b4a0e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\033fd8ebd08002d3dff4bc0e18333582ea8f7f68\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="341fc0b4661ec63331b1d95d8ceaeb04f5fd25cd">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_4f6a32b94698b89d31c6d5c4707d9f518f1f9c3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\be3310bea27a01a831d6d48cd763cba3e162cc5e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_7100d58190620a01b2a3f0c745ea5072e4355e34.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\c5b9aa78a58352b28beb846d2b2827123b813f29\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="56ae1b700bdd20fdf8c5347fadcc96228fc1bf16">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_bbc9e9cd5a362d946283a7c049056105b62fd64e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\536198c6afff62280c4f0cc7f3768edde3aa3ba4\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_21a3e2a6a6e0175626b1cc03c182b8dad67a6a4a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\4e3dcd0340085f8bb4514eb2430e0fe1838a5d12\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_600eee2b29d4abddaa3bb178d7304e5737e840a3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\e1420242a9ee2f7a1c4782339eb4dec1ea1a1acf\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_845ef3bde5f2d797a91cefd2192c10b98ad56376.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\support-annotations-25.3.1_c02addbee7c002a50fdeaff5d40322ae04be9ab0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\7094ea9847be6c6b873f9cb0b84c7ec6005f894a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="03589bac12234193d4a7a9b106a6db1b367afe99">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_e6e05d42eaf57f2c9298c301c8017275898ffc05.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\a0c60310daef70ab3fa12eade1ede8449d79ebfa\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_413536d0b87d3495f6053acea6f8dac60bd8314a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\2582e81548d35665bf41e21976cb95ac07750f1f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7b4dc2d9e39fb8ec5ddca9b3b3cb7c627690f3a6">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_3a24d7ae0d42eeb839d017e0dca3d0a4fdd8d782.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\8a3e9c87ffc0875479590544258b27b37d33f116\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_f46b0be88ecb6750b444510dc680d26ba8203dcf.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Git\TimeReport\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
@@ -11,12 +146,102 @@
         <dex dex="C:\Git\TimeReport\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_210ffd9f2389ccd1fa41139ff8dfb1243d99287a\classes.dex" />
     </item>
     <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\abb407790c0569157872a42d2c27613923c4617e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_6ec88c032383aa0103cda68cfdf8ef7562e6e9f9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\743320f05938ba0b2b196f963607d1f5e2cd6918\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3da345d7c08a7e9d83a34d8723057624b941c0ea">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_2afdce148e619e05a41cc38483301d39600685b3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\41b18a4e6d3b7a511436e74a11225417286723c3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_d3f4dfd2ade88da23b17d5cfe7f18cfb6c36c53e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\d11d3d5700a4a3d7f825610c96e3a092ec557f81\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d1e7ad8d5340b695e52cc5a14819f4264a4f4b8e">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_40997cb2525ea6a7ff28fba671ac56198ed7b695.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\35316dcc5aecbd4151968540c0d86aa670b6b9ad\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_4ed0797cbb79b0c8d786fac2f4c5958cb43b23d1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\db3b95b93ca3ed22db91411cbf1b8caaee75a793\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="132a3661719fdac703f2a6f6a7b178c85cfe3cc6">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_f1d4706d848a73fb1b3c5ac6232c48072f19ebc4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\20a0de5dc7fc0dde6fefb3c8cac64a44ec34f1dc\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="edba0aec4aedd4edb3a520b4ee87adc52be762da">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_8700a00bb2c64566ef44b9e5d8a38f656b755941.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\0e72dbdb941de455a81893780326348a620d2461\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cad6f251cba07624f49b0c5b6287731a3c9957b8">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_226d1ed47774985a5689880ced3a60b3a60634be.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\f96d095861656b11dc626fba2c620247630a8be6\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="36a6c288ed760d2d899126fa90761b84af10dd2d">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_b4cf257dfa575b86ffcb57e1078c3d8ab6f0a063.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Registered User\.android\build-cache\d7e18272813bd00f3ba9f7ee2655c61597f35b53\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="28ed270c519ff2874343e0824808da2efda0df9c">
+        <dex dex="C:\Git\TimeReport\app\build\intermediates\pre-dexed\debug\classes_9c7d378fd80aa0e3eb86bf788038eea16117316f.jar" />
+    </item>
+    <item
         is-multidex="true"
         jar="C:\Git\TimeReport\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="c6a18644463647209d573e426dfde0ebd944f982">
+        sha1="ba673a281f3dbc986ff74d6dea6dd85344a7d7e1">
         <dex dex="C:\Git\TimeReport\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_7b8c4533b3bf0b6dcb9de0aa6defb390288fca4e\classes.dex" />
     </item>
 

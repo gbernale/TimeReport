@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <TextView
+        android:id="@+id/tv_dateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date   " />
+    <TextView
+        android:id="@+id/tv_timeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time In  " />
+
+    <TextView
+        android:id="@+id/tv_timeOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Time Out" />
+
+    <TextView
+        android:id="@+id/tv_totahours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Total Hours" />
+</LinearLayout>

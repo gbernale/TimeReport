@@ -50,8 +50,6 @@ public class CompanyFragment extends Fragment {
         buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
         buttonSaveData = (Button) view.findViewById(R.id.buttonSaveData);
 
-        // loadUserdata(user);
-
         buttonSaveData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view2) {
@@ -74,11 +72,9 @@ public class CompanyFragment extends Fragment {
                 String periodBegin = editTextperiodBegin.getText().toString().trim();
                 String status = "A";
                 Company company = new Company(Id,name, address, phone,email,period,periodBegin,status);
-                //FirebaseUser user = firebaseAuth.getCurrentUser();
                 databaseReference.child("Company").push().setValue(company);
-//                databaseReference.child("Company").setValue(company);
                 Toast.makeText(getContext(), "Profile saved  .....", Toast.LENGTH_LONG).show();
-                //loadCompanyData(user);
+
             }
         });
 

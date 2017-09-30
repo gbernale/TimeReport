@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -126,7 +128,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public static class TimePickerFragment extends DialogFragment
+    public static  class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
 
         public static final int FLAG_START_DATE = 0;
@@ -171,39 +173,42 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
             final String user_status = "Active";
             final String comments = "Regular activities";
 
-            // I added on Sept 24 to check and update records if already exist
+            // I added on Sept 24 to check and update records - time out -  if already exist
 
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    int checkif=0;
-                    firebaseAuth= FirebaseAuth.getInstance();
+                    int checkif = 0;
+                    firebaseAuth = FirebaseAuth.getInstance();
                     FirebaseUser user = firebaseAuth.getCurrentUser();
 
                     DataSnapshot currentUserTimeReports = dataSnapshot.child("TimeReport").child(user.getUid());
+
                     for (DataSnapshot currentUserTimeReport : currentUserTimeReports.getChildren()) {
                         TimeReport currentUserTimeReportValue = currentUserTimeReport.getValue(TimeReport.class);
-                        if(currentUserTimeReportValue.getDate_out().equals (syearout))
-                        {
+                        if (currentUserTimeReportValue.getDate_out().equals(syearout) && currentUserTimeReportValue.getTime_out().equals("00:00:00")) {
                             try {
                                 currentUserTimeReportValue.time_out = stimeout;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
-//                                databaseReference.put("/TimeReport/" + time_out, stimeout);
-//                                databaseReference.updateChildren(TimeReport);
-                                checkif=1;
+                                checkif = 1;
+                                Toast.makeText(getActivity(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
+
                             } catch (Exception e) {
-                                e.printStackTrace();  }
+                                e.printStackTrace();
+                            }
                         }
                     }
-                    if (checkif == 0 )  {
-                        TimeReport userdata = new TimeReport(location,week_number,syearin, stimein,syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
-                        DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
-                        timeReport.setValue(currentUserTimeReports);
-                        Toast.makeText(getActivity(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
-                    }
 
+                   if(checkif ==0)  {
+                    TimeReport userdata = new TimeReport(location, week_number, syearin, stimein, syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
+                    DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
+                    timeReport.setValue(userdata);
+                    Toast.makeText(getActivity(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
                 }
+
+            }
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
@@ -211,10 +216,6 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                 }
             });
 
-            getActivity().finish();
-            Intent intent = new Intent();
-            intent.setClass(getActivity(), ProfileActivity.class);
-            startActivity(intent);
 
         }
 
@@ -223,4 +224,5 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
             newFragment.show(getFragmentManager(), "timePicker");
         }
     }
+
 }
