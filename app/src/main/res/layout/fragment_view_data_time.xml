@@ -6,7 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:text=" Date       Initial Time    Fina Time   Hours"
+        android:text="    Date            Initial Time    Final Time   Hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -33,7 +33,7 @@
         android:text="Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="450dp"
         android:layout_gravity="center_horizontal"
         android:textSize="10dp"
         android:id="@+id/buttonLogout" />

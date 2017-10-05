@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -187,13 +188,23 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
 
                     for (DataSnapshot currentUserTimeReport : currentUserTimeReports.getChildren()) {
                         TimeReport currentUserTimeReportValue = currentUserTimeReport.getValue(TimeReport.class);
-                        if (currentUserTimeReportValue.getDate_out().equals(syearout) && currentUserTimeReportValue.getTime_out().equals("00:00:00")) {
+                        if (currentUserTimeReportValue.getDate_out().equals(syearout) && stimeout != "00:00:00") {
                             try {
                                 currentUserTimeReportValue.time_out = stimeout;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
                                 checkif = 1;
-                                Toast.makeText(getActivity(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity().getApplication(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
 
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        if ( currentUserTimeReportValue.getDate_in().equals(syearin) && stimein != "00:00:00") {
+                            try {
+                                currentUserTimeReportValue.time_in = stimein;
+                                currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
+                                checkif = 1;
+                                Toast.makeText(getActivity().getApplicationContext(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -204,7 +215,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                     TimeReport userdata = new TimeReport(location, week_number, syearin, stimein, syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
                     DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
                     timeReport.setValue(userdata);
-                    Toast.makeText(getActivity(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplication(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
                 }
 
             }

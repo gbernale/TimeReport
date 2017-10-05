@@ -85,11 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         Intent i = new Intent(getBaseContext(), TimePicker.class);
         startActivity(i);
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        ViewDataTimeFragment viewDataTimeFragment = new ViewDataTimeFragment();
-        transaction.replace(R.id.fragment_container,viewDataTimeFragment,"DataTime Detail");
-        transaction.commit();
+
     }
     private void callFragmentProfile()
     {

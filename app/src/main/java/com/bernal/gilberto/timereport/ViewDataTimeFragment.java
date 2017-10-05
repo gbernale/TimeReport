@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -58,23 +59,22 @@ public class ViewDataTimeFragment extends Fragment {
         tvsalida = (TextView) view.findViewById(R.id.tvsalida);
         lv = (ListView) view.findViewById(R.id.lv);
         buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener()
+        Query query = databaseReference.child("TimeReport").child(user.getUid()).orderByChild("date_in");
+        query.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-// Get Post object and use the values to update the UI
-                DataSnapshot timereportData = dataSnapshot.child("TimeReport");
-                for (DataSnapshot postSnapshot : timereportData.getChildren()){
-                    if (postSnapshot.getKey().equals (user.getUid())) {
-                        for (DataSnapshot snapshot : postSnapshot.getChildren()) {
-                            TimeReport userTimeReport = snapshot.getValue(TimeReport.class);
-                            String userdataString = userTimeReport.getDate_in() + "  "+ userTimeReport.getTime_in() +" "+ userTimeReport.getTime_out() +" "+ userTimeReport.getTotal_hours()+ "\n\n";
-                            clientAdapter.add(userdataString);
+                // Get Post object and use the values to update the UI
 
-                        }
-                        lv.setAdapter(clientAdapter);
-                    }
-                }}
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    TimeReport userTimeReport = snapshot.getValue(TimeReport.class);
+                    String userdataString = userTimeReport.getDate_in() + "  " + userTimeReport.getTime_in() + " " + userTimeReport.getTime_out() + "    " + userTimeReport.getTotal_hours() + "\n\n";
+                    clientAdapter.add(userdataString);
+
+                }
+                lv.setAdapter(clientAdapter);
+            }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 // Getting Post failed, log a message
