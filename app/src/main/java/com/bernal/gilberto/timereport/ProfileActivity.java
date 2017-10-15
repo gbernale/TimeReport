@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
-    private Button buttonLogout;
+    private Button buttonLogout, buttonTimeReport, buttonViewTimeReport;
     private TextView textViewUserMail;
     private DatabaseReference databaseReference;
     private EditText editTextName, editTextAddress, editTextPhone;
@@ -42,12 +42,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        buttonSaveData = (Button) findViewById(R.id.buttonSaveData);
+       // buttonSaveData = (Button) findViewById(R.id.buttonSaveData);
         FirebaseUser user = firebaseAuth.getCurrentUser();
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        buttonTimeReport = (Button) findViewById(R.id.buttonTimeReport);
+        buttonViewTimeReport = (Button) findViewById(R.id.buttonViewTimeReport);
         textViewUserMail = (TextView) findViewById(R.id.textViewUserEmail);
         textViewUserMail.setText(" Welcome "+ user.getEmail());
         buttonLogout.setOnClickListener(this);
+        buttonTimeReport.setOnClickListener(this);
+        buttonViewTimeReport.setOnClickListener(this);
     }
     // added to include menu options
     @Override
@@ -120,8 +124,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
-        if (view == buttonSaveData){
-// saveUserData();
+        if (view == buttonTimeReport){
+            callFragmentAddDateTime ();
+        }
+        if(view== buttonViewTimeReport){
+            callFragmentViewDataTime();
+
         }
     }
 }

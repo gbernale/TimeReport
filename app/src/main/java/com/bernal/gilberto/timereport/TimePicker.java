@@ -37,7 +37,7 @@ import static com.bernal.gilberto.timereport.TimePicker.DatePickerDialogFragment
 
 public class TimePicker extends AppCompatActivity implements View.OnClickListener{
 
-    private static   Button startDateButton, finishDateButton;
+    private static   Button startDateButton, finishDateButton, buttonBack;
     private  static  TextView startDateTextView, finishDateTextView;
     private DatePickerDialogFragment mDatePickerDialogFragment;
 
@@ -57,6 +57,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
 
         startDateButton = (Button) findViewById(R.id.b_pick);
         finishDateButton = (Button) findViewById(R.id.b_pick1);
+        buttonBack = (Button) findViewById(R.id.back);
         startDateTextView = (TextView) findViewById(R.id.tv_datetimeInput);
         finishDateTextView = (TextView) findViewById(R.id.tv_datetimeOutput);
         mDatePickerDialogFragment = new DatePickerDialogFragment();
@@ -67,6 +68,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
 
         startDateButton.setOnClickListener(this);
         finishDateButton.setOnClickListener(this);
+        buttonBack.setOnClickListener(this);
     }
 
     @Override
@@ -79,6 +81,10 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
         } else if (id == R.id.b_pick1) {
             mDatePickerDialogFragment.setFlag(FLAG_END_DATE);
             mDatePickerDialogFragment.show(getFragmentManager(), "datePicker");
+        } else if ( id == R.id.back){
+
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
         }
     }
 

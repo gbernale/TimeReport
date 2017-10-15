@@ -6,36 +6,53 @@
     android:layout_height="match_parent"
     tools:context="com.bernal.gilberto.timereport.TimePicker">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get In Date"
-        android:id="@+id/b_pick"
-        android:layout_marginLeft="46dp"
-        android:layout_marginStart="46dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Out Date"
-        android:id="@+id/b_pick1"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/b_pick"
-        android:layout_toEndOf="@+id/b_pick"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp" />
+
 
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="480dp"
+        android:layout_height="400dp"
         android:id="@+id/fragment_container"
         android:layout_marginTop="22dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get In Date"
+        android:id="@+id/b_pick"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:background="@drawable/button_shape"
+        android:layout_below="@+id/fragment_container"
+        android:layout_alignLeft="@+id/fragment_container"
+        android:layout_alignStart="@+id/fragment_container"
+        android:layout_marginTop="17dp" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Out Date"
+        android:id="@+id/b_pick1"
+        android:background="@drawable/button_shape"
+        android:layout_alignBaseline="@+id/b_pick"
+        android:layout_alignBottom="@+id/b_pick"
+        android:layout_toRightOf="@+id/b_pick"
+        android:layout_toEndOf="@+id/b_pick"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:id="@+id/back"
+        android:background="@drawable/button_shape"
+        android:layout_alignBaseline="@+id/b_pick1"
+        android:layout_alignBottom="@+id/b_pick1"
+        android:layout_alignRight="@+id/fragment_container"
+        android:layout_alignEnd="@+id/fragment_container" />
 
     <TextView
         android:id="@+id/tv_datetimeInput"
@@ -45,12 +62,12 @@
         android:layout_alignStart="@+id/b_pick"
         android:layout_below="@+id/b_pick"
         android:layout_marginTop="84dp"
-        android:text="i" />
+        android:text="" />
     <TextView
         android:id="@+id/tv_datetimeOutput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="o"
+        android:text=""
         android:layout_alignBaseline="@+id/tv_datetimeInput"
         android:layout_alignBottom="@+id/tv_datetimeInput"
         android:layout_alignLeft="@+id/b_pick1"
