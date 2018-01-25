@@ -40,13 +40,12 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
     private static   Button startDateButton, finishDateButton, buttonBack;
     private  static  TextView startDateTextView, finishDateTextView;
     private DatePickerDialogFragment mDatePickerDialogFragment;
-
     private  static  FirebaseAuth firebaseAuth;
     private static DatabaseReference databaseReference;
-
     private static String syearin, syearout, stimein, stimeout ;
-
+    private static int tTimeIn, tTimeOut;
     public  static int  flag;
+    public static int lunchTime = 30;
 
 
 
@@ -162,19 +161,22 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                 String m = Integer.toString(minute);
                 String h = Integer.toString(hourOfDay);
                 stimein = h + ":" + m + ":" + "00";
+                tTimeIn = hourOfDay*60 + minute;
                 stimeout ="00:00:00";
             }  else if (flag == FLAG_END_DATE)
             {
                 String m = Integer.toString(minute);
                 String h = Integer.toString(hourOfDay);
                 stimeout = h + ":" + m + ":" + "00";
+                tTimeOut = (hourOfDay  )*60 + minute;
                 stimein="00:00:00";
             }
 
             //startDateTextView.setText( "Time : " + m + " " +" " + h + "\n ");
             final  String location = "Main Location";
-            final int total_hours = 8;
-            final int total_hours_value = 400;
+            final float total_hours;
+            total_hours = 0;
+            final float total_hours_value = 400;
             final int week_number = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
             final String hour_status =  "Pending";
             final String user_status = "Active";
@@ -197,6 +199,9 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                         if (currentUserTimeReportValue.getDate_out().equals(syearout) && stimeout != "00:00:00") {
                             try {
                                 currentUserTimeReportValue.time_out = stimeout;
+                                int memTotalTimeIn = currentUserTimeReportValue.getTotal_minutes_in();
+                                currentUserTimeReportValue.total_hours = (tTimeOut-memTotalTimeIn-lunchTime)/60;
+                                currentUserTimeReportValue.total_minutes_out = tTimeOut;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
                                 checkif = 1;
                                 Toast.makeText(getActivity().getApplication(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
@@ -208,6 +213,9 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                         if ( currentUserTimeReportValue.getDate_in().equals(syearin) && stimein != "00:00:00") {
                             try {
                                 currentUserTimeReportValue.time_in = stimein;
+                                int memTotalTimeOut = currentUserTimeReportValue.getTotal_minutes_out();
+                                currentUserTimeReportValue.total_hours = Math.round((memTotalTimeOut- tTimeIn-lunchTime)/60);
+                                currentUserTimeReportValue.total_minutes_in = tTimeIn;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
                                 checkif = 1;
                                 Toast.makeText(getActivity().getApplicationContext(), "TimeReport Record Updated  .....", Toast.LENGTH_LONG).show();
@@ -218,7 +226,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                     }
 
                    if(checkif ==0)  {
-                    TimeReport userdata = new TimeReport(location, week_number, syearin, stimein, syearout, stimeout, total_hours, total_hours_value, hour_status, user_status, comments);
+                    TimeReport userdata = new TimeReport(location, week_number, syearin, stimein, syearout, stimeout, tTimeIn, tTimeOut, total_hours, total_hours_value, hour_status, user_status, comments);
                     DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
                     timeReport.setValue(userdata);
                     Toast.makeText(getActivity().getApplication(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();

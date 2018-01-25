@@ -6,7 +6,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:text="    Date            Initial Time    Final Time   Hours"
+        android:text="      Date                 Time In       Time Out      Hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

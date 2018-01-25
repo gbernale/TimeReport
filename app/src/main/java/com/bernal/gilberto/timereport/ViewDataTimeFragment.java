@@ -68,7 +68,7 @@ public class ViewDataTimeFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     TimeReport userTimeReport = snapshot.getValue(TimeReport.class);
-                    String userdataString = userTimeReport.getDate_in() + "  " + userTimeReport.getTime_in() + " " + userTimeReport.getTime_out() + "    " + userTimeReport.getTotal_hours() + "\n\n";
+                    String userdataString = userTimeReport.getDate_in() + "   " + userTimeReport.getTime_in() + "    " + userTimeReport.getTime_out() + "     " + userTimeReport.getTotal_hours() + "\n\n";
                     clientAdapter.add(userdataString);
 
                 }
