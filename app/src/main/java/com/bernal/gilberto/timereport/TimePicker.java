@@ -5,12 +5,18 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,7 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
-import static com.bernal.gilberto.timereport.R.id.time;
+
 import static com.bernal.gilberto.timereport.TimePicker.DatePickerDialogFragment.FLAG_END_DATE;
 import static com.bernal.gilberto.timereport.TimePicker.DatePickerDialogFragment.FLAG_START_DATE;
 
@@ -40,9 +46,10 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
     private static   Button startDateButton, finishDateButton, buttonBack;
     private  static  TextView startDateTextView, finishDateTextView;
     private DatePickerDialogFragment mDatePickerDialogFragment;
+    private WorkLocationDialogFragment wkFragment;
     private  static  FirebaseAuth firebaseAuth;
     private static DatabaseReference databaseReference;
-    private static String syearin, syearout, stimein, stimeout ;
+    private static String syearin, syearout, stimein, stimeout, swklocation, location ;
     private static int tTimeIn, tTimeOut;
     public  static int  flag;
     public static int lunchTime = 30;
@@ -68,7 +75,9 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
         startDateButton.setOnClickListener(this);
         finishDateButton.setOnClickListener(this);
         buttonBack.setOnClickListener(this);
-    }
+        wkFragment = WorkLocationDialogFragment.newInstance("Location Picker");
+
+        }
 
     @Override
     public void onClick(View view) {
@@ -77,6 +86,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.b_pick) {
             mDatePickerDialogFragment.setFlag(FLAG_START_DATE);
             mDatePickerDialogFragment.show(getFragmentManager(), "datePicker");
+            wkFragment.show(getFragmentManager(),"Location Picker");
         } else if (id == R.id.b_pick1) {
             mDatePickerDialogFragment.setFlag(FLAG_END_DATE);
             mDatePickerDialogFragment.show(getFragmentManager(), "datePicker");
@@ -112,11 +122,11 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
-
             Calendar calendar = Calendar.getInstance();
             calendar.set(year, monthOfYear, dayOfMonth);
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             if (flag == FLAG_START_DATE) {
+
                 startDateButton.setText(format.format(calendar.getTime()));
                 syearin = format.format(calendar.getTime());
                 syearout=syearin;
@@ -153,8 +163,6 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                     android.text.format.DateFormat.is24HourFormat(getActivity()));
         }
 
-
-
         public void onTimeSet(android.widget.TimePicker view, int hourOfDay, int minute) {
             // Do something with the time chosen by the user
             if (flag == FLAG_START_DATE) {
@@ -173,10 +181,10 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
             }
 
             //startDateTextView.setText( "Time : " + m + " " +" " + h + "\n ");
-            final  String location = "Main Location";
-            final float total_hours;
+            //final  String location = swklocation;
+            final double total_hours;
             total_hours = 0;
-            final float total_hours_value = 400;
+            final double total_hours_value = 400;
             final int week_number = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
             final String hour_status =  "Pending";
             final String user_status = "Active";
@@ -200,7 +208,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                             try {
                                 currentUserTimeReportValue.time_out = stimeout;
                                 int memTotalTimeIn = currentUserTimeReportValue.getTotal_minutes_in();
-                                currentUserTimeReportValue.total_hours = (tTimeOut-memTotalTimeIn-lunchTime)/60;
+                                currentUserTimeReportValue.total_hours = ((tTimeOut-memTotalTimeIn-lunchTime)/60.0d);
                                 currentUserTimeReportValue.total_minutes_out = tTimeOut;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
                                 checkif = 1;
@@ -214,7 +222,8 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                             try {
                                 currentUserTimeReportValue.time_in = stimein;
                                 int memTotalTimeOut = currentUserTimeReportValue.getTotal_minutes_out();
-                                currentUserTimeReportValue.total_hours = Math.round((memTotalTimeOut- tTimeIn-lunchTime)/60);
+                                currentUserTimeReportValue.total_hours = Math.round(((memTotalTimeOut- tTimeIn-lunchTime)/60.0d)*100/100);
+                                currentUserTimeReportValue.location = location;
                                 currentUserTimeReportValue.total_minutes_in = tTimeIn;
                                 currentUserTimeReport.getRef().setValue(currentUserTimeReportValue);
                                 checkif = 1;
@@ -240,14 +249,70 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
 
                 }
             });
-
-
         }
 
-        public void showTimePickerDialog(View v) {
+         public void showTimePickerDialog(View v) {
             DialogFragment newFragment = new TimePickerFragment();
             newFragment.show(getFragmentManager(), "timePicker");
         }
     }
 
-}
+       // fragment to get work location
+    public static class WorkLocationDialogFragment extends DialogFragment  {
+
+        private EditText mEditText;
+
+        public WorkLocationDialogFragment() {
+            // Empty constructor is required for DialogFragment
+            // Make sure not to add arguments to the constructor
+            // Use `newInstance` instead as shown below
+        }
+
+        public static WorkLocationDialogFragment newInstance(String workLocation) {
+            WorkLocationDialogFragment frag = new WorkLocationDialogFragment();
+            Bundle args = new Bundle();
+            args.putString("Work Location", workLocation);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.work_location, container);
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            // Get field from view
+            mEditText = (EditText) view.findViewById(R.id.etWorkLocation);
+            swklocation = mEditText.getText().toString().trim();
+           Button  buttonCancel = (Button) view.findViewById(R.id.btnBack);
+           Button buttonOK = (Button) view.findViewById(R.id.btnOK);
+            // Fetch arguments from bundle and set title
+            final String workLocation = getArguments().getString("Work_Location", "Enter WorkLocation");
+            getDialog().setTitle(workLocation);
+            // Show soft keyboard automatically and request focus to field
+            mEditText.requestFocus();
+            swklocation = mEditText.getText().toString().trim();
+            getDialog().getWindow().setSoftInputMode(
+                    WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+            buttonOK.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    swklocation = mEditText.getText().toString().trim();
+                    location = mEditText.getText().toString().trim();
+                    dismiss();
+
+                }
+            });
+            buttonCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+
+    }}}

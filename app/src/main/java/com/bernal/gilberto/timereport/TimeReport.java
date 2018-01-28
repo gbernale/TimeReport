@@ -17,15 +17,15 @@ public class TimeReport {
     public String time_out;
     public int total_minutes_in;
     public int total_minutes_out;
-    public float total_hours;
-    public float total_hours_value;
+    public double total_hours;
+    public double total_hours_value;
     public String hour_status ;
     public String user_status;
     public String comments;
 
     public TimeReport(){}
 
-    public TimeReport(String location, int week_number, String date_in, String time_in, String date_out, String time_out, int total_minutes_in, int  total_minutes_out, float total_hours, float total_hours_value, String hour_status, String user_status, String comments) {
+    public TimeReport(String location, int week_number, String date_in, String time_in, String date_out, String time_out, int total_minutes_in, int  total_minutes_out, double total_hours, double total_hours_value, String hour_status, String user_status, String comments) {
         this.location = location;
         this.week_number = week_number;
         this.date_in = date_in;
@@ -73,11 +73,11 @@ public class TimeReport {
         return total_minutes_out;
     }
 
-    public float getTotal_hours() {
+    public double getTotal_hours() {
         return total_hours;
     }
 
-    public float getTotal_hours_value() {
+    public double getTotal_hours_value() {
         return total_hours_value;
     }
 
