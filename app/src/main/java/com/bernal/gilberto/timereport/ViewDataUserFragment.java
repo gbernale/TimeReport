@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,42 +22,47 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+import static android.content.ContentValues.TAG;
 
 
-public class ViewDataTimeFragment extends Fragment {
+public class ViewDataUserFragment extends Fragment {
 
-    public ViewDataTimeFragment() {
+
+    public ViewDataUserFragment() {
         // Required empty public constructor
     }
+
+    private View view;
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
-    private View view;
-    private Button buttonLogout;
-    private static final String TAG = "ViewDataTimeFragment";
     private FirebaseUser user;
-    private TextView tvsalida;
-    private ListView lv;
-    final ArrayList<String> keyList = new ArrayList<>();
-    final ArrayList<String> reportItems = new ArrayList<>();
+    private  ListView lv;
+    private Button buttonBack;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_view_data_time, container, false);
-        final ArrayAdapter<String> clientAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1);
+
+        view = inflater.inflate(R.layout.fragment_view_data_user, container, false);
+        lv = (ListView) view.findViewById(R.id.lv2);
+        final ArrayAdapter<String> userAdapter = new ArrayAdapter<>(view.getContext(), android.R.layout.simple_list_item_1);
+        buttonBack = (Button) view.findViewById(R.id.buttonBack);
         firebaseAuth= FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         user = firebaseAuth.getCurrentUser();
-        TextView tv3 = (TextView) getActivity().findViewById(R.id.tv3);
-        tv3.setVisibility(View.GONE);
-        tvsalida = (TextView) view.findViewById(R.id.tvsalida);
-        lv = (ListView) view.findViewById(R.id.lv);
-        buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
-        Query query = databaseReference.child("TimeReport").child(user.getUid()).orderByChild("date_in");
+
+        //Query query = databaseReference.child("TimeReport").child("Company").orderByChild("name");
+       // Query query2 = databaseReference.child("TimeReport").child(user.getUid()).orderByChild("name");
+        Query query = databaseReference.child("UserProfileData").orderByChild("name");
         query.addListenerForSingleValueEvent(new ValueEventListener()
         {
             @Override
@@ -66,12 +70,11 @@ public class ViewDataTimeFragment extends Fragment {
                 // Get Post object and use the values to update the UI
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    TimeReport userTimeReport = snapshot.getValue(TimeReport.class);
-                    String userdataString = userTimeReport.getDate_in() + "   " + userTimeReport.getTime_in() + "   " + userTimeReport.getTime_out() + "   " + userTimeReport.getTotal_hours() + "\n\n";
-                    clientAdapter.add(userdataString);
-
+                    User userTimeReport = snapshot.getValue(User.class);
+                    String userdataString = userTimeReport.getName()+ "\n";
+                    userAdapter.add(userdataString);
                 }
-                lv.setAdapter(clientAdapter);
+                lv.setAdapter(userAdapter);
             }
 
             @Override
@@ -81,7 +84,7 @@ public class ViewDataTimeFragment extends Fragment {
 //System.out.println("The read failed: " );
             }
         });
-        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getActivity().finish();
@@ -89,10 +92,27 @@ public class ViewDataTimeFragment extends Fragment {
                 intent.setClass(getActivity(), ProfileActivity.class);
                 startActivity(intent);
             }
-        });
-        return view;
+         });
+         return view;
+        //return inflater.inflate(R.layout.fragment_view_data_user, container, false);
+
     }
 
-}
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
 
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+    }
+
+   }

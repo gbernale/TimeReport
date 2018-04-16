@@ -238,7 +238,7 @@ public class TimePicker extends AppCompatActivity implements View.OnClickListene
                     TimeReport userdata = new TimeReport(location, week_number, syearin, stimein, syearout, stimeout, tTimeIn, tTimeOut, total_hours, total_hours_value, hour_status, user_status, comments);
                     DatabaseReference timeReport = databaseReference.child("TimeReport").child(user.getUid()).push();
                     timeReport.setValue(userdata);
-                    Toast.makeText(getActivity().getApplication(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "TimeReport Record saved  .....", Toast.LENGTH_LONG).show();
                 }
 
             }

@@ -64,13 +64,16 @@ public class ProfileFragment extends Fragment {
         buttonLogout = (Button) view.findViewById(R.id.buttonLogout);
         buttonSaveData = (Button) view.findViewById(R.id.buttonSaveData);
   //   functionality added to include cpmpany spinner
-        DatabaseReference companyDbReference = databaseReference.child("Company");
+        final DatabaseReference companyDbReference = databaseReference.child("Company");
         companyDbReference.addListenerForSingleValueEvent(new ValueEventListener() {
 
            @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+               FirebaseUser user = firebaseAuth.getCurrentUser();
                for (DataSnapshot areaSnapshot : dataSnapshot.getChildren()) {
                    String companyName = areaSnapshot.child("name").getValue(String.class);
+                   String companyemailAddress = areaSnapshot.child("emailAddress").getValue(String.class);
+                   String companyId = areaSnapshot.child("name").getKey();
                    if (companyName != null) {
                        companies.add(companyName);
                    }
@@ -117,11 +120,12 @@ public class ProfileFragment extends Fragment {
                 String address = editTextAddress.getText().toString().trim();
                 String phone = editTextPhone.getText().toString().trim();
                 String value = editTextHourValue.getText().toString().trim();
-                boolean isAdmin = false;
+                boolean isAdmin = true;
                 int hourvalue = Integer.parseInt(value);
                 User datauser = new User(name, address, phone,hourvalue,isAdmin,company);
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 databaseReference.child("UserProfileData").child(user.getUid()).setValue(datauser);
+               // databaseReference.child("UserProfileData").child(company.companyId).child(user.getUid()).setValue(datauser);
                 Toast.makeText(getContext(), "Profile saved  .....", Toast.LENGTH_LONG).show();
                 loadUserdata(user);
             }
@@ -148,6 +152,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
+
                 DataSnapshot customerData = dataSnapshot.child("UserProfileData");
                 for (DataSnapshot postSnapshot : customerData.getChildren()){
                     if (postSnapshot.getKey().equals (user.getUid())) {

@@ -70,8 +70,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.add_datetime: // add_datetime;
                 callFragmentAddDateTime(); // callFragmentAddDateTime();
                 return true;
-            case R.id.view_datetime:    // view_datetime;
+            case R.id.view_datetime:    // view_datetime x one employee;
                 callFragmentViewDataTime(); // callFragmentViewDataTime();
+                return true;
+            case R.id.view_userdatetime:    // view_datetime for al users;
+                callFragmentViewUserDataTime(); // callFragmentViewDataTime();
                 return true;
             case R.id.add_company:
                 callFragmentAddCompany();
@@ -88,8 +91,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     {
         Intent i = new Intent(getBaseContext(), TimePicker.class);
         startActivity(i);
-
-
     }
     private void callFragmentProfile()
     {
@@ -105,6 +106,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FragmentTransaction transaction = manager.beginTransaction();
         ViewDataTimeFragment viewDataTimeFragment = new ViewDataTimeFragment();
         transaction.replace(R.id.fragment_container,viewDataTimeFragment,"DataTime Detail");
+        transaction.commit();
+    }
+
+    private void callFragmentViewUserDataTime()
+    {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        ViewDataUserFragment viewDataUserFragment = new ViewDataUserFragment();
+        transaction.replace(R.id.fragment_container,viewDataUserFragment,"DataTime Manager");
         transaction.commit();
     }
 
