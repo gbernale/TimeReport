@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -75,6 +76,12 @@ public class ViewDataUserFragment extends Fragment {
                     userAdapter.add(userdataString);
                 }
                 lv.setAdapter(userAdapter);
+                lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView<?> adapter, View v, int position, long id) {
+                        //MyClass selItem = (MyClass) adapter.getItem(position);
+                    }
+                });
             }
 
             @Override
